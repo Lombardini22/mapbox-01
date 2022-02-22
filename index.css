@@ -1,0 +1,45 @@
+:root {
+  --marker-color-green: #9dd926;
+  --marker-color-red: #f44336;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#map {
+  position: absolute;
+  inset: 0;
+}
+
+.marker {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.marker.green {
+  background-color: var(--marker-color-green);
+}
+
+.marker.red {
+  background-color: var(--marker-color-red);
+}
+
+.marker.image {
+  width: 48px;
+  height: 48px;
+  background-image: url(https://docs.mapbox.com/mapbox-gl-js/assets/washington-monument.jpg);
+  background-size: cover;
+}
+
+.mapboxgl-popup {
+  max-width: 320px;
+}
+
+.mapboxgl-popup a,
+.mapboxgl-popup a:visited {
+  color: inherit;
+}
