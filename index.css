@@ -58,33 +58,6 @@ h5 {
   border: 2px solid transparent;
 }
 
-.marker-icon {
-  width: auto;
-  height: auto;
-  border-radius: 0;
-  border: none;
-}
-
-.marker-icon > span:first-child {
-  display: block;
-  width: 32px;
-  height: 32px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: #fff;
-  border-radius: 50%;
-  border: 2px solid var(--marker-color-black);
-}
-
-.marker-icon > span:nth-child(2) {
-  display: block;
-  max-width: 160px;
-  font-family: "GT Walsheim", sans-serif;
-  text-transform: uppercase;
-  font-weight: bold;
-  margin-top: 0.25rem;
-}
-
 span.marker {
   display: inline-block;
 }
@@ -100,6 +73,14 @@ span.marker {
 
 .marker.black {
   background-color: var(--marker-color-black);
+}
+
+.marker.icon {
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position: center center;
+  border-color: var(--marker-color-black);
+  cursor: default;
 }
 
 .mapboxgl-popup-content {

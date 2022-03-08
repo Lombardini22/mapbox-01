@@ -1,7 +1,36 @@
 const MarkerCategory = {
-  Logistics: "Logistics",
-  LastMile: "Last Mile",
-  Unavailable: "Non disponibile",
+  Logistics: {
+    name: "Logistics",
+    icon: null,
+  },
+  LastMile: {
+    name: "Last Mile",
+    icon: null,
+  },
+  Unavailable: {
+    name: "Non disponibile",
+    icon: null,
+  },
+  City: {
+    name: "Città",
+    icon: "location_city",
+  },
+  Road: {
+    name: "Strada",
+    icon: "road",
+  },
+  Car: {
+    name: "Casello autostradale",
+    icon: "car",
+  },
+  Railway: {
+    name: "Stazione ferroviaria",
+    icon: "railway",
+  },
+  Airport: {
+    name: "Aeroporto",
+    icon: "local_airport",
+  },
 };
 
 const MarkerType = {
@@ -14,7 +43,7 @@ const pins = {
     {
       type: MarkerType.Hub,
       coords: [11.612585832942786, 44.42633415796408],
-      category: MarkerCategory.Logistics,
+      category: "Logistics",
       imageUrl: "./assets/csp.jpg",
       url: "https://www.google.com",
       title: "CSP",
@@ -23,7 +52,7 @@ const pins = {
     {
       type: MarkerType.Hub,
       coords: [10.20748084609425, 45.557005241095766],
-      category: MarkerCategory.Logistics,
+      category: "Logistics",
       imageUrl: "./assets/brescia.jpg",
       url: "https://www.google.com",
       title: "Brescia",
@@ -32,7 +61,7 @@ const pins = {
     {
       type: MarkerType.Hub,
       coords: [10.32337522358069, 45.458929165211245],
-      category: MarkerCategory.LastMile,
+      category: "LastMile",
       imageUrl: "./assets/montichiari.jpg",
       url: "https://www.google.com",
       title: "Montichiari",
@@ -41,7 +70,7 @@ const pins = {
     {
       type: MarkerType.Hub,
       coords: [10.42709859586792, 44.82709859586792],
-      category: MarkerCategory.Unavailable,
+      category: "Unavailable",
       imageUrl: "./cover-image.jpg",
       url: "https://www.google.com",
       title: "Parma",
@@ -50,7 +79,7 @@ const pins = {
     {
       type: MarkerType.Hub,
       coords: [11.72709859586792, 44.82709859586792],
-      category: MarkerCategory.Unavailable,
+      category: "Unavailable",
       imageUrl: "./cover-image.jpg",
       url: "https://www.google.com",
       title: "Ferrara",
@@ -59,25 +88,63 @@ const pins = {
   ],
   montichiari: [
     {
-      type: MarkerType.Hub,
-      coords: [10.32337522358069, 45.458929165211245],
-      category: MarkerCategory.LastMile,
-      imageUrl: "./cover-image.jpg",
-      url: "https://www.google.com",
-      title: "Montichiari",
-      address: "Paese, Provincia, IT",
-    },
-    {
       type: MarkerType.POI,
-      coords: [10.3247483, 45.4256264],
-      title: "Aeroporto Brescia-Montichiari",
+      coords: [10.3306, 45.4276],
       icon: "local_airport",
     },
     {
       type: MarkerType.POI,
-      coords: [10.2106313, 45.5323787],
-      title: "Stazione ferroviaria di Brescia",
+      coords: [10.212783, 45.532408],
       icon: "railway",
+    },
+    {
+      type: MarkerType.POI,
+      coords: [10.322619, 45.483961],
+      icon: "car",
+    },
+    {
+      type: MarkerType.POI,
+      coords: [10.2159, 45.46795],
+      icon: "car",
+    },
+    {
+      type: MarkerType.POI,
+      coords: [10.052934, 45.53113],
+      icon: "road",
+    },
+    {
+      type: MarkerType.POI,
+      coords: [10.318122, 45.475604],
+      icon: "road",
+    },
+    {
+      type: MarkerType.POI,
+      coords: [10.220278, 45.538889],
+      icon: "location_city",
+    },
+    {
+      type: MarkerType.POI,
+      coords: [10.992778, 45.438611],
+      icon: "location_city",
+    },
+    {
+      type: MarkerType.POI,
+      coords: [9.67, 45.695],
+      icon: "location_city",
+    },
+    {
+      type: MarkerType.POI,
+      coords: [9.1595, 45.4613],
+      icon: "location_city",
+    },
+    {
+      type: MarkerType.Hub,
+      coords: [10.32337522358069, 45.458929165211245],
+      category: "LastMile",
+      imageUrl: "./assets/montichiari.jpg",
+      url: "https://www.google.com",
+      title: "Montichiari",
+      address: "Paese, Provincia, IT",
     },
   ],
 };
@@ -101,7 +168,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const [mapCenter, mapZoom] = (() => {
     switch (key) {
       case "montichiari":
-        return [[10.3337241, 45.4863428], 10];
+        return [[10.3337241, 45.4863428], 8];
       default:
         return [[12.978, 44.231], 6.19];
     }
@@ -125,11 +192,11 @@ window.addEventListener("DOMContentLoaded", () => {
             alt="${pin.title}"
           >
           <div class="l22-custom-popup-content ${color}">
-            <h5>${pin.category}</h5>
+            <h5>${MarkerCategory[pin.category].name}</h5>
             <h4>${pin.title}</h4>
             <p>${pin.address}</p>
             ${
-              pin.category !== MarkerCategory.Unavailable
+              pin.category !== "Unavailable"
                 ? `<a href="${pin.url}" target="_blank" rel="noopen">Scopri di più</a>`
                 : ""
             }
@@ -148,19 +215,12 @@ window.addEventListener("DOMContentLoaded", () => {
         return;
       }
       case MarkerType.POI: {
-        const markerContainer = document.createElement("div");
-        const markerElement = document.createElement("span");
-        const markerLabel = document.createElement("span");
+        const markerElement = document.createElement("div");
 
-        markerContainer.classList.add("marker-icon");
+        markerElement.classList.add("marker", "icon");
         markerElement.style.backgroundImage = `url(./assets/icon_${pin.icon}.svg)`;
-        markerLabel.innerHTML = pin.title;
 
-        markerContainer.appendChild(markerElement);
-        markerContainer.appendChild(markerLabel);
-
-        new mapboxgl.Marker(markerContainer).setLngLat(pin.coords).addTo(map);
-
+        new mapboxgl.Marker(markerElement).setLngLat(pin.coords).addTo(map);
         return;
       }
       default:
@@ -172,14 +232,18 @@ window.addEventListener("DOMContentLoaded", () => {
   const legendSidebar = document.getElementById("legend-sidebar");
 
   legendContainer &&
-    Object.values(MarkerCategory).forEach((category) => {
-      const color = getCategoryColor(category);
+    Object.entries(MarkerCategory).forEach(([key, category]) => {
+      const color = getCategoryColor(key);
       const legendItemContainer = document.createElement("li");
       const legendItemMarker = document.createElement("span");
       const legendItemLabel = document.createElement("span");
 
       legendItemMarker.classList.add("marker", color);
-      legendItemLabel.innerText = category;
+      legendItemLabel.innerText = category.name;
+
+      if (category.icon) {
+        legendItemMarker.style.backgroundImage = `url(./assets/icon_${category.icon}.svg)`;
+      }
 
       legendItemContainer.appendChild(legendItemMarker);
       legendItemContainer.appendChild(legendItemLabel);
@@ -202,13 +266,19 @@ window.addEventListener("DOMContentLoaded", () => {
     );
 });
 
-function getCategoryColor(category) {
-  switch (category) {
-    case MarkerCategory.Logistics:
+function getCategoryColor(categoryName) {
+  switch (categoryName) {
+    case "Logistics":
       return "green";
-    case MarkerCategory.LastMile:
+    case "LastMile":
       return "white";
-    case MarkerCategory.Unavailable:
+    case "Unavailable":
       return "black";
+    case "City":
+    case "Road":
+    case "Car":
+    case "Railway":
+    case "Airport":
+      return "icon";
   }
 }
