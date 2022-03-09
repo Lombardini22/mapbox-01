@@ -8,7 +8,7 @@ const MarkerCategory = {
     icon: null,
   },
   Unavailable: {
-    name: "Non disponibile",
+    name: "Immobile locato",
     icon: null,
   },
   City: {
@@ -16,7 +16,7 @@ const MarkerCategory = {
     icon: "location_city",
   },
   Road: {
-    name: "Strada",
+    name: "Autostrada / tangenziale",
     icon: "road",
   },
   Car: {
@@ -43,7 +43,7 @@ const pins = {
     {
       type: MarkerType.Hub,
       coords: [11.612585832942786, 44.42633415796408],
-      category: "Logistics",
+      category: "LastMile",
       imageUrl: "./assets/csp.jpg",
       url: "https://www.google.com",
       title: "CSP",
@@ -52,7 +52,7 @@ const pins = {
     {
       type: MarkerType.Hub,
       coords: [10.20748084609425, 45.557005241095766],
-      category: "Logistics",
+      category: "LastMile",
       imageUrl: "./assets/brescia.jpg",
       url: "https://www.google.com",
       title: "Brescia",
@@ -61,7 +61,7 @@ const pins = {
     {
       type: MarkerType.Hub,
       coords: [10.32337522358069, 45.458929165211245],
-      category: "LastMile",
+      category: "Logistics",
       imageUrl: "./assets/montichiari.jpg",
       url: "https://www.google.com",
       title: "Montichiari",
@@ -140,7 +140,7 @@ const pins = {
     {
       type: MarkerType.Hub,
       coords: [10.32337522358069, 45.458929165211245],
-      category: "LastMile",
+      category: "Logistics",
       imageUrl: "./assets/montichiari.jpg",
       url: "https://www.google.com",
       title: "Montichiari",
