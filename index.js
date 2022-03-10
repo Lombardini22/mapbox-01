@@ -16,8 +16,12 @@ const MarkerCategory = {
     icon: "location_city",
   },
   Road: {
-    name: "Autostrada / tangenziale",
+    name: "Tangenziale",
     icon: "road",
+  },
+  HighRoad: {
+    name: "Autostrada",
+    icon: "high_road",
   },
   Car: {
     name: "Casello autostradale",
@@ -46,8 +50,8 @@ const pins = {
       category: "LastMile",
       imageUrl: "./assets/csp.jpg",
       url: "https://www.google.com",
-      title: "CSP",
-      address: "Paese, Provincia, IT",
+      title: "Castel San Pietro",
+      address: "Castel San Pietro Terme, BO, IT",
     },
     {
       type: MarkerType.Hub,
@@ -56,7 +60,7 @@ const pins = {
       imageUrl: "./assets/brescia.jpg",
       url: "https://www.google.com",
       title: "Brescia",
-      address: "Paese, Provincia, IT",
+      address: "Brescia, BS, IT",
     },
     {
       type: MarkerType.Hub,
@@ -65,7 +69,7 @@ const pins = {
       imageUrl: "./assets/montichiari.jpg",
       url: "https://www.google.com",
       title: "Montichiari",
-      address: "Paese, Provincia, IT",
+      address: "Castenedolo, BS, IT",
     },
     {
       type: MarkerType.Hub,
@@ -90,52 +94,32 @@ const pins = {
     {
       type: MarkerType.POI,
       coords: [10.3306, 45.4276],
-      icon: "local_airport",
+      category: "Airport",
     },
     {
       type: MarkerType.POI,
       coords: [10.212783, 45.532408],
-      icon: "railway",
+      category: "Railway",
     },
     {
       type: MarkerType.POI,
       coords: [10.322619, 45.483961],
-      icon: "car",
+      category: "Car",
     },
     {
       type: MarkerType.POI,
       coords: [10.2159, 45.46795],
-      icon: "car",
+      category: "Car",
     },
     {
       type: MarkerType.POI,
-      coords: [10.052934, 45.53113],
-      icon: "road",
+      coords: [10.318110430029018, 45.4756154472314],
+      category: "HighRoad",
     },
     {
       type: MarkerType.POI,
-      coords: [10.318122, 45.475604],
-      icon: "road",
-    },
-    {
-      type: MarkerType.POI,
-      coords: [10.220278, 45.538889],
-      icon: "location_city",
-    },
-    {
-      type: MarkerType.POI,
-      coords: [10.992778, 45.438611],
-      icon: "location_city",
-    },
-    {
-      type: MarkerType.POI,
-      coords: [9.67, 45.695],
-      icon: "location_city",
-    },
-    {
-      type: MarkerType.POI,
-      coords: [9.1595, 45.4613],
-      icon: "location_city",
+      coords: [10.05747507932085, 45.53775119009684],
+      category: "Road",
     },
     {
       type: MarkerType.Hub,
@@ -168,7 +152,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const [mapCenter, mapZoom] = (() => {
     switch (key) {
       case "montichiari":
-        return [[10.3337241, 45.4863428], 8];
+        return [[10.3337241, 45.4863428], 10.5];
       default:
         return [[12.978, 44.231], 6.19];
     }
@@ -218,7 +202,9 @@ window.addEventListener("DOMContentLoaded", () => {
         const markerElement = document.createElement("div");
 
         markerElement.classList.add("marker", "icon");
-        markerElement.style.backgroundImage = `url(./assets/icon_${pin.icon}.svg)`;
+        markerElement.style.backgroundImage = `url(./assets/icon_${
+          MarkerCategory[pin.category].icon
+        }.svg)`;
 
         new mapboxgl.Marker(markerElement).setLngLat(pin.coords).addTo(map);
         return;
@@ -232,8 +218,12 @@ window.addEventListener("DOMContentLoaded", () => {
   const legendSidebar = document.getElementById("legend-sidebar");
 
   legendContainer &&
-    Object.entries(MarkerCategory).forEach(([key, category]) => {
-      const color = getCategoryColor(key);
+    Object.entries(MarkerCategory).forEach(([categoryName, category]) => {
+      if (!pins[key].find((pin) => pin.category === categoryName)) {
+        return;
+      }
+
+      const color = getCategoryColor(categoryName);
       const legendItemContainer = document.createElement("li");
       const legendItemMarker = document.createElement("span");
       const legendItemLabel = document.createElement("span");

@@ -35,6 +35,7 @@ h4 {
   text-transform: uppercase;
   margin-top: 0;
   margin-bottom: 0;
+  line-height: 1.2;
 }
 
 h5 {
@@ -79,6 +80,7 @@ span.marker {
   background-color: #fff;
   background-repeat: no-repeat;
   background-position: center center;
+  background-size: 24px 24px;
   border-color: var(--marker-color-black);
   cursor: default;
 }
@@ -89,10 +91,6 @@ span.marker {
 
 .l22-custom-popup-content {
   padding: 10px 10px 15px;
-}
-
-.l22-custom-popup-content p {
-  max-width: 120px;
 }
 
 .l22-custom-popup-content a {
