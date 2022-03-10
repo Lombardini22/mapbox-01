@@ -114,12 +114,12 @@ const pins = {
     {
       type: MarkerType.POI,
       coords: [10.318110430029018, 45.4756154472314],
-      category: "HighRoad",
+      category: "Road",
     },
     {
       type: MarkerType.POI,
       coords: [10.05747507932085, 45.53775119009684],
-      category: "Road",
+      category: "HighRoad",
     },
     {
       type: MarkerType.Hub,
