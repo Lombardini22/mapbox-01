@@ -47,7 +47,7 @@ const pins = {
     {
       type: MarkerType.Hub,
       coords: [11.612585832942786, 44.42633415796408],
-      category: "LastMile",
+      category: "Logistics",
       imageUrl: "./assets/csp.jpg",
       url: "https://www.google.com",
       title: "Castel San Pietro",
